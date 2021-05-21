@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the 247commerce BigCommerce-CARDSAVER app.
+ * This file is part of the 247Commerce BigCommerce CARDSAVER App.
  *
- * (c) 247commerce private limited <info@247commerce.co.uk>
+ * ©247 Commerce Limited <info@247commerce.co.uk>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -60,16 +60,6 @@ class Settings extends BaseController
 		if (strpos($response->getHeader('content-type'), 'application/json') != false)
 		{
 			$body     = $response->getBody();
-			/*$body = '{
-    "access_token": "7px4uxt9a66e6k9qd84eyy3hb2s2v6v",
-    "scope": "store_cart store_checkout store_content_checkout store_payments_access_token_create store_payments_methods_read store_sites store_stored_payment_instruments store_v2_content store_v2_customers store_v2_default store_v2_information store_v2_orders store_v2_products store_v2_transactions users_basic_information",
-    "user": {
-        "id": "1997712",
-        "username": "jaiganeshtest@247commerce.co.uk",
-        "email": "jaiganeshtest@247commerce.co.uk"
-    },
-    "context": "stores\/3ia9rfnt4k"
-}';*/
 			$response = json_decode($body, true);
 			if (isset($response['access_token']))
 			{

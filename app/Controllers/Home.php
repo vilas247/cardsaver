@@ -1,9 +1,8 @@
 <?php
-
 /**
- * This file is part of the 247commerce BigCommerce-PURPLEBRICKS app.
+ * This file is part of the 247Commerce BigCommerce CARDSAVER App.
  *
- * (c) 247commerce private limited <info@247commerce.co.uk>
+ * ©247 Commerce Limited <info@247commerce.co.uk>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,13 +13,13 @@ namespace App\Controllers;
 /**
  * Class Home
  *
- * Represents a PURPLEBRICKS setup related function to load BigCommerce
+ * Represents a CARDSAVER setup related function to load BigCommerce
  * connector and launch configuration.
  */
 class Home extends BaseController
 {
 	/**
-	 * Index - default home page once app installed in PURPLEBRICKS
+	 * Index - default home page once app installed in CARDSAVER
 	 * and valid segments.
 	 *
 	 * @return Load BigCommerce store page

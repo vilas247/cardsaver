@@ -1,8 +1,8 @@
 <?php
 /**
- * This file is part of the 247commerce BigCommerce-CARDSAVER app.
+ * This file is part of the 247Commerce BigCommerce CARDSAVER App.
  *
- * (c) 247commerce private limited <info@247commerce.co.uk>
+ * ©247 Commerce Limited <info@247commerce.co.uk>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
