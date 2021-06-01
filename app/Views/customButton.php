@@ -20,7 +20,7 @@
                             <p>Custom Payment Button</p>
                         </div>
                         <div class="col-md-6 text-end col-sm-6 col-6">
-                            <p><i class="fas fa-arrow-left me-2"></i>Back to dashboard</p>
+                            <a href="<?= getenv('app.baseURL') ?>home/dashboard"><h5><i class="fas fa-arrow-left me-2"></i>Back to dashboard</h5></a>
                         </div>
                     </div>
                   </div>

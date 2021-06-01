@@ -9,7 +9,7 @@
 <?php include('header.php');
 ?>
 <link rel="stylesheet" type="text/css" href="<?= getenv('app.ASSETSPATH') ?>css/datatable/jquery.dataTables.min.css">
-    <main class="main-content">
+    <main class="main-content retail-merchant">
       <div class="container">
         <div class="col-md-10 col-12 mx-auto">
         <div class="row mb-2">

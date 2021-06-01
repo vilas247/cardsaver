@@ -10,7 +10,7 @@
 namespace App\Controllers;
 
 /**
- * Class WorldPay
+ * Class Cardsaverpay
  *
  * Represents a CARDSAVER Crdsaver Payment Authentication and redirection
  */
@@ -26,7 +26,7 @@ class Cardsaverpay extends BaseController
 	}
 	
 	/**
-	 * worldpay Paymet data and redirection
+	 * Cardsaver Paymet data and redirection
 	 *
 	 */
 	public function authentication()
@@ -122,16 +122,15 @@ class Cardsaverpay extends BaseController
 					
 					$req['signature'] = \SettingsViews::createSignature($req, $key).'|merchantID,action,type,countryCode,currencyCode,amount,orderRef,transactionUnique,redirectURL';
 					$data = array(
-								'id'=>'247cardstream_form',
-								'url'=>getenv('bigcommerceapp.CARDSTREAM_URL'),
+								'id'=>'247cardsaver_form',
+								'url'=>getenv('bigcommerceapp.CARDSAVER_URL'),
 								'modal'=>true,
 								'data'=>$req,
 							);
 					$res['status'] = true;
-					//$url = BASE_URL."cardstreamPay.php?invoiceId=".base64_encode(json_encode($invoiceId));
 					$res['data'] = array();
 					$res['data'] = $data;
-					$res['form_id'] = '#247cardstream_form';
+					$res['form_id'] = '#247cardsaver_form';
 				}
 			}
 		}
@@ -156,7 +155,8 @@ class Cardsaverpay extends BaseController
 				if(!empty($invoice_id)) {
 					$data = [
 						'status' => "CONFIRMED",
-						'api_response' => addslashes(json_encode($_REQUEST))
+						'api_response' => addslashes(json_encode($_REQUEST)),
+						'amount_paid' => @$_REQUEST['amount'],
 					];
 					$builderupdate = $db->table('order_payment_details'); 
 					$builderupdate->where('order_id', $invoice_id); 

@@ -33,7 +33,7 @@
   <body>
     <div class="nav-section header-image">
         <nav class="navbar navbar-light navbar-header p-lg-0">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="<?= getenv('app.baseURL') ?>home/dashboard">
         <img src="<?= getenv('app.ASSETSPATH') ?>img/card-saver.png" alt="">
         </a>
         <div class="navbar-text">

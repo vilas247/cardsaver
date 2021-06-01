@@ -95,13 +95,15 @@ class Settings extends BaseController
 			$builder      = $db->table('cardsaver_token_validation');
 			$builder->select('*');
 			$builder->where('store_hash', $storeHash);
-			$builder->where('email_id', $email);
+			//$builder->where('email_id', $email);
 			$query        = $builder->get();
 			$result       = $query->getResultArray();
-			$validationId = $result[0]['validation_id'];
-			$emailId      = $result[0]['email_id'];
-			$bcToken      = $result[0]['acess_token'];
-			return redirect()->to('/settings/bcredirect/' . $emailId . '/' . $validationId);
+			if(count($result) > 0){
+				$validationId = $result[0]['validation_id'];
+				$emailId      = $result[0]['email_id'];
+				$bcToken      = $result[0]['acess_token'];
+				return redirect()->to('/settings/bcredirect/' . $emailId . '/' . $validationId);
+			}
 		}
 	}
 	

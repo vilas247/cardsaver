@@ -206,7 +206,15 @@ class Home extends BaseController
 						foreach($cols_data as $dbk=>$dbv){
 							if(isset($values[$dbv['val']])){
 								if($dbv['val'] == "created_date"){
-									$inner_array[] = date("Y-m-d h:i A",strtotime($values[$dbv['val']]));
+									$date = date("Y-m-d h:i A",strtotime($values[$dbv['val']]));
+									if(isset($values['api_response'])){
+										$api_response = str_replace("\\","",$values['api_response']);
+										$api_response = json_decode($api_response,true);
+										if(isset($api_response['timestamp'])){
+											$date = $api_response['timestamp'];
+										}
+									}
+									$inner_array[] = $date;
 								}else if($dbv['val'] == "api_response"){
 									$res_val = '';
 									if(isset($values['api_response'])){
@@ -245,6 +253,80 @@ class Home extends BaseController
 		$final_array['recordsFiltered'] = $recordsFiltered;
 		$final_array['data'] = $outer_array;
 		echo json_encode($final_array,true);exit;
+	}
+	
+	/*
+	* getOrder
+	*/
+	public function dashboardSearch()
+	{
+		helper('settingsviews');
+		$clientDetails = \SettingsViews::getClientDetails();
+		$data = '';
+		if(!empty($clientDetails)){
+			$db = \Config\Database::connect();
+			$builder = $db->table('order_payment_details opd');
+			$builder->select('opd.api_response,opd.id,opd.settlement_status,opd.type,opd.amount_paid,opd.email_id as email,opd.order_id as invoice_id,od.order_id,opd.status,opd.currency,opd.total_amount,opd.created_date');
+			$builder->join('order_details od', 'opd.order_id = od.invoice_id','left');
+			$builder->where('opd.email_id', $clientDetails['email_id']);
+			if(!empty($this->request->getPost('searchText'))){
+				$search_val = $this->request->getPost('searchText');
+				$builder->like('od.order_id', $search_val);
+				$builder->orLike('opd.api_response', $search_val);
+			}
+			$builder->orderBy('opd.id', 'DESC');
+			$builder->limit(15);
+			$query = $builder->get();
+			$result_final = $query->getResultArray();
+			if(count($result_final) > 0){
+				foreach($result_final as $k=>$values) {
+					$inner_array = array();
+					if(!empty($values['invoice_id'])){
+						$data .= '<tr>
+									<td>';
+										if(isset($values['api_response'])){
+												$api_response = str_replace("\\","",$values['api_response']);
+												$api_response = json_decode($api_response,true);
+												if(isset($api_response['transactionID'])){
+													$data .= $api_response['transactionID'];
+												}
+											}
+									$data .= '</td>';
+									$data .= '<td>'.$values['order_id'].'</td>';
+									$data .= '<td>'.$values['type'].'</td>';
+									$data .= '<td>';
+											$sstatus = '';
+											if($values['status'] == "CONFIRMED"){
+												$sstatus = '<span class="badge bg-success table-status-clr">'.ucfirst($values['status']).'</span>';
+											}else{
+												$sstatus = '<span class="badge btn-pink table-status-clr">'.ucfirst($values['status']).'</span>';
+											}
+										$data .= $sstatus;
+									$data .= '</td>';
+									$data .= '<td>'.$values['currency'].'</td>';
+									$data .= '<td>'.$values['total_amount'].'</td>';
+									$data .= '<td>'.$values['amount_paid'].'</td>';
+									$data .= '<td>';
+											if(isset($values['api_response'])){
+												$api_response = str_replace("\\","",$values['api_response']);
+												$api_response = json_decode($api_response,true);
+												if(isset($api_response['timestamp'])){
+													$data .= $api_response['timestamp'];
+												}else{
+													$data .= date("Y-m-d h:i A",strtotime($values['created_date']));
+												}
+											}else{
+												$data .= date("Y-m-d h:i A",strtotime($values['created_date']));
+											}
+									$data .= '</td>';
+								  $data .= '</tr>';
+						
+					}
+					
+				}
+			}
+		}
+		echo $data;exit;
 	}
 	
 	/*

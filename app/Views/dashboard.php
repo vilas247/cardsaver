@@ -60,7 +60,7 @@
         <div class="row top-bar order-srch">
           <div class="col-md-12 col-sm-8 col-8 top-search">
             <i class="fas fa-search"></i>
-            <input type="text" class="search-input rounded-end" id="myInput" onkeyup="myFunction()" placeholder="Search">
+            <input type="text" class="search-input rounded-end" id="myInput" placeholder="Search">
           </div>
         </div>
         <div class="table-responsive table-color">
@@ -75,6 +75,7 @@
                     <th>Amount Paid</th>
                     <th>Created Date</th>
                   </tr>
+				  <tbody id="rowData">
 				<?php
 					if(count($orderDetails) > 0){
 						foreach($orderDetails as $k=>$values) {
@@ -101,9 +102,9 @@
 						<?php
 							$sstatus = '';
 							if($values['status'] == "CONFIRMED"){
-								$sstatus = '<span class="badge bg-success table-status-clr">'.ucfirst($values['settlement_status']).'</span>';
+								$sstatus = '<span class="badge bg-success table-status-clr">'.ucfirst($values['status']).'</span>';
 							}else{
-								$sstatus = '<span class="badge btn-pink table-status-clr">'.ucfirst($values['settlement_status']).'</span>';
+								$sstatus = '<span class="badge btn-pink table-status-clr">'.ucfirst($values['status']).'</span>';
 							}
 						?>
 						<?= $sstatus ?>
@@ -111,9 +112,24 @@
                     <td><?= $values['currency'] ?></td>
                     <td><?= $values['total_amount'] ?></td>
                     <td><?= $values['amount_paid'] ?></td>
-                    <td><?= date("Y-m-d h:i A",strtotime($values['created_date'])) ?></td>
+					<td>
+						<?php
+							if(isset($values['api_response'])){
+								$api_response = str_replace("\\","",$values['api_response']);
+								$api_response = json_decode($api_response,true);
+								if(isset($api_response['timestamp'])){
+									echo $api_response['timestamp'];
+								}else{
+									echo date("Y-m-d h:i A",strtotime($values['created_date']));
+								}
+							}else{
+								echo date("Y-m-d h:i A",strtotime($values['created_date']));
+							}
+						?>
+					</td>
                   </tr>
 				<?php } } ?>
+				</tbody>
             </table>
         </div>
       </div>
@@ -145,34 +161,40 @@
     <script src="<?= getenv('app.ASSETSPATH') ?>js/bootstrap.bundle.min.js"></script>
 	<script src="<?= getenv('app.ASSETSPATH') ?>js/247carstreamloader.js"></script>
 	<script src="<?= getenv('app.ASSETSPATH') ?>js/toaster/jquery.toaster.js"></script>
-    <script>
-		function myFunction() {
-		  // Declare variables
-		  var input, filter, table, tr, td, i, txtValue;
-		  input = document.getElementById("myInput");
-		  filter = input.value.toUpperCase();
-		  table = document.getElementById("myTable");
-		  tr = table.getElementsByTagName("tr");
-
-		  // Loop through all table rows, and hide those who don't match the search query
-		  for (i = 0; i < tr.length; i++) {
-			td = tr[i].getElementsByTagName("td")[0];
-			if (td) {
-			  txtValue = td.textContent || td.innerText;
-			  if (txtValue.toUpperCase().indexOf(filter) > -1) {
-				tr[i].style.display = "";
-			  } else {
-				tr[i].style.display = "none";
-			  }
-			}
-		  }
-		}
-</script>
 <script type="text/javascript">
 		var text = "Please wait...";
 		var current_effect = "bounce";
 		var app_base_url = "<?= getenv('app.baseURL') ?>";
 		$(document).ready(function() {
+			$('body').on('keyup','#myInput',function(event){
+				var keycode = (event.keyCode ? event.keyCode : event.which);
+				if(keycode == '13'){
+					$("body").waitMe({
+						effect: current_effect,
+						text: text,
+						bg: "rgba(255,255,255,0.7)",
+						color: "#000",
+						maxSize: "",
+						waitTime: -1,
+						source: "images/img.svg",
+						textPos: "vertical",
+						fontSize: "",
+						onClose: function(el) {}
+					});
+					var searchText = $(this).val();
+					$.ajax({
+						type: 'POST',
+						url: app_base_url + "home/dashboardSearch",
+						//dataType: 'json',
+						data:{searchText:searchText},
+						success: function (res) {
+							$("body").waitMe("hide");
+							$('body #rowData').html(res);
+							
+						}
+					});
+				}
+			});
 			$('body').on('change','#actionChange',function(){
 				$("body").waitMe({
 					effect: current_effect,

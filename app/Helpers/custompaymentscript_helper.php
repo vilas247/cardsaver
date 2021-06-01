@@ -48,10 +48,6 @@ class CustomPaymentScript
 			if(isset($result_c['is_enabled']) && $result_c['is_enabled'] == 1){
 				$enable = 1;
 			}
-			$filecontent = '$("head").append("<script src=\"'.getenv('app.ASSETSPATH').'js/247carstreamloader.js\" ></script>");';
-			//$filecontent .= '$("head").append("<script src=\"'.getenv('app.ASSETSPATH').'js/hostedFields.js\" ></script>");';
-			$filecontent .= '$("head").append("<link rel=\"stylesheet\" type=\"text/css\" href=\"'.getenv('app.ASSETSPATH').'css/247carstreamloader.css\" />");';
-			$filecontent .= '$("head").append("<link rel=\"stylesheet\" type=\"text/css\" href=\"'.getenv('app.ASSETSPATH').'css/hosted-fields.css\" />");var hformInitialized = false;';
 			
 			$buttonCode = '<button id="form-submit" type="submit" class="button button--action button--large button--slab optimizedCheckout-buttonPrimary" style="background-color: #424242;border-color: #424242;color: #fff;" disabled>Continue</button>';
 			
@@ -62,44 +58,44 @@ class CustomPaymentScript
 			}
 			
 			$folderPath = getenv('app.SCRIPSPATH').$sellerdb;
-			$filecontent = '$("head").append("<script src=\"'.getenv('app.ASSETSPATH').'js/247carstreamloader.js\" ></script>");';
-			$filecontent .= '$("head").append("<link rel=\"stylesheet\" type=\"text/css\" href=\"'.getenv('app.ASSETSPATH').'css/247carstreamloader.css\" />");';
-			$filecontent .= '$("head").append("<link rel=\"stylesheet\" type=\"text/css\" href=\"'.getenv('app.ASSETSPATH').'css/hosted-fields.css\" />");';
+			$filecontent = '$("head").append("<script src=\"'.getenv('app.ASSETSPATH').'js/247cardsaverloader.js\" ></script>");';
+			$filecontent .= '$("head").append("<link rel=\"stylesheet\" type=\"text/css\" href=\"'.getenv('app.ASSETSPATH').'css/247cardsaverloader.css\" />");';
+			$filecontent .= '$("head").append("<link rel=\"stylesheet\" type=\"text/css\" href=\"'.getenv('app.ASSETSPATH').'css/cardsaver-hosted-fields.css\" />");var cardsaverhformInitialized = false;';
 			
-			$filecontent .= 'var btnHTML = \'<div id="247cardsteampayment" class="checkout-form " style="padding: 1px;display:none;"> <div id="247CardStremErr" style="color:red"></div> <form id="form" name="cardstreampayment" method="POST" novalidate="novalidate" lang="en" action="https://gateway.cardstream.com/direct/"> <input type="hidden" id="247cardstreamkey" value="'.base64_encode(json_encode($tokenData,true)).'"><input type="hidden" id="merchantID" name="merchantID"><input type="hidden" id="action" name="action"><input type="hidden" id="type" name="type"><input type="hidden" id="countryCode" name="countryCode"><input type="hidden" id="currencyCode" name="currencyCode"><input type="hidden" id="amount" name="amount"><input type="hidden" id="orderRef" name="orderRef"><input type="hidden" id="transactionUnique" name="transactionUnique"><input type="hidden" id="redirectURL" name="redirectURL"><input type="hidden" id="signature" name="signature"> <ul class="form-checklist optimizedCheckout-form-checklist bootstrap-wrapper"> <li class="form-checklist-item optimizedCheckout-form-checklist-item form-checklist-item--selected optimizedCheckout-form-checklist-item--selected"> <div class="form-checklist-header form-checklist-header--selected"> <div class="row"> <div class="col-sm-12 col-md-8"> <div class="form-field"> <!-- <input name="paymentProviderRadio" class="form-checklist-checkbox optimizedCheckout-form-checklist-checkbox" id="radio-cardstream" type="radio" value="cardstream" checked> --><label for="radio-cardstream" class="form-label optimizedCheckout-form-label"><span class="paymentProviderHeader-name" data-test="payment-method-name">CardStream Payments</span></label> </div> </div> <div class="col-sm-12 col-md-4"> <div class="paymentProviderHeader-cc"><ul class="creditCardTypes-list"><li class="creditCardTypes-list-item"><span class="cardIcon"><div class="icon cardIcon-icon icon--medium" data-test="credit-card-icon-visa"><svg height="100" viewBox="0 0 148 100" width="148" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M148 84c0 6.6-5.55 12-12 12H12C5.55 96 0 90.6 0 84V12C0 5.4 5.55 0 12 0h124c6.45 0 12 5.4 12 12v72z" fill="#F3F4F4"></path><path d="M0 24V12C0 5.4 5.74 0 12 0h124c6.26 0 12 5.4 12 12v12" fill="#01579F"></path><path d="M148 76v12c0 8.667-5.74 12-12 12H12c-6.26 0-12-3.333-12-12V76" fill="#FAA41D"></path><path d="M55.01 65.267l4.72-29.186h7.546l-4.72 29.19H55.01M89.913 36.8c-1.49-.59-3.85-1.242-6.77-1.242-7.452 0-12.7 3.974-12.73 9.656-.063 4.19 3.756 6.52 6.613 7.918 2.92 1.428 3.913 2.36 3.913 3.633-.04 1.957-2.36 2.857-4.54 2.857-3.014 0-4.628-.465-7.08-1.552l-.996-.466-1.055 6.55c1.77.808 5.03 1.52 8.415 1.553 7.92 0 13.075-3.912 13.137-9.967.03-3.322-1.987-5.868-6.334-7.948-2.64-1.336-4.256-2.236-4.256-3.602.032-1.242 1.367-2.514 4.348-2.514 2.453-.06 4.254.53 5.62 1.12l.684.31L89.91 36.8m10.03 18.13c.62-1.675 3.013-8.165 3.013-8.165-.03.062.62-1.707.994-2.794l.525 2.52s1.428 6.986 1.74 8.445H99.94zm9.317-18.846h-5.84c-1.8 0-3.17.53-3.945 2.424L88.265 65.27h7.918s1.305-3.6 1.585-4.377h9.687c.217 1.024.9 4.377.9 4.377h6.987l-6.082-29.19zm-60.555 0l-7.39 19.904-.807-4.037c-1.37-4.652-5.653-9.713-10.435-12.23l6.77 25.52h7.98L56.68 36.09H48.7" fill="#3B5CAA"></path><path d="M34.454 36.08H22.312l-.124.59c9.47 2.423 15.744 8.26 18.32 15.277L37.87 38.534c-.436-1.863-1.77-2.39-3.416-2.453" fill="#F8A51D"></path></g></svg></div></span></li><li class="creditCardTypes-list-item"><span class="cardIcon"><div class="icon cardIcon-icon icon--medium" data-test="credit-card-icon-american-express"><svg height="104" viewBox="0 0 156 104" width="156" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M144 104H12c-6.15 0-12-5.85-12-12V12C0 5.85 5.85 0 12 0h132c6.15 0 12 5.85 12 12v80c0 6.15-5.85 12-12 12z" fill="#60C7EE"></path><g fill="#FFF"><path d="M95.05 46.532v3.68h12.93v4.723H95.05V59.5h12.79l5.244-6.824-4.673-6.144H95.05m-59.707 9.382h5.906l-2.97-8.324-2.94 8.324"></path><path d="M128.833 52.77l11.29-15.125h-19.067l-2.536 3.9-2.608-3.9h-46.59l-1.254 4.224-1.264-4.227H31.27L17.72 68.687h17.326l1.31-3.822h3.824l1.345 3.822h73.594l3.28-4.594 3.28 4.594h19.36l-4.867-6.343-7.342-9.574zM83.185 64.744H76.38v-17.66l-5.243 17.66h-6.16l-5.233-17.66v17.66H44.318l-1.345-3.823H33.54l-1.312 3.826h-8.483L33.85 41.588h9.065L52.94 64.56V41.59h10.927l4.214 14.09 4.187-14.09h10.92v23.156zm40.524 0l-5.31-7.44-5.31 7.44H86.72V41.588h27.085l4.76 7.124 4.63-7.124h9.062l-8.37 11.215 9.16 11.94h-9.338z"></path></g></g></svg></div></span></li><li class="creditCardTypes-list-item"><span class="cardIcon"><div class="icon cardIcon-icon icon--medium" data-test="credit-card-icon-mastercard"><svg viewBox="0 0 131.39 86.9" xmlns="http://www.w3.org/2000/svg"><path d="M48.37 15.14h34.66v56.61H48.37z" fill="#ff5f00"></path><path d="M51.94 43.45a35.94 35.94 0 0113.75-28.3 36 36 0 100 56.61 35.94 35.94 0 01-13.75-28.31z" fill="#eb001b"></path><path d="M120.5 65.76V64.6h.5v-.24h-1.19v.24h.47v1.16zm2.31 0v-1.4h-.36l-.42 1-.42-1h-.36v1.4h.26V64.7l.39.91h.27l.39-.91v1.06zM123.94 43.45a36 36 0 01-58.25 28.3 36 36 0 000-56.61 36 36 0 0158.25 28.3z" fill="#f79e1b"></path></svg></div></span></li></ul></div> </div> </div> </div> <div style="" id="247cardstreamPaynowButton" class="form-checklist-body"> <input type="hidden" name="paymentToken" value=""> <div class="row"> <div class="col-sm-12 col-md-9"> <div class="form-group"><label for="form-card-number">Card Number:</label><input id="form-card-number" type="hostedfield:cardNumber" name="card-number" autocomplete="ccnumber" class="form-control form-controlhosted" style="background: #f2f8fb;" required></div> </div> <div class="col-sm-12 col-md-3"> <div class="form-group"><label for="form-card-expiry-date">Expiration:</label><input id="form-card-expiry-date" type="hostedfield:cardExpiryDate" name="card-expirydate" autocomplete="cc-exp" class="form-control form-control-hosted" placeholder="MM / YY" required></div> </div> </div> <div class="row"> <div class="col-sm-12 col-md-9"> <div class="form-group"><label for="form-customer-name">Name on Card:</label><input id="form-customer-name" type="text" name="paymentToken[customerName]" autocomplete="ccname" class="form-control form-control-native hostedfield-tokenise" required></div> </div> <div class="col-sm-12 col-md-3"> <div class="form-group form-cvv"><label for="form-card-cvv">CVV:</label><input id="form-card-cvv" type="hostedfield:cardCVV" name="card-cvv" autocomplete="cc-csc" class="form-control form-control-hosted" required></div> </div> </div> '.$buttonCode.'</div></li></ul></form></div>\';';
+			$filecontent .= 'var cardsaverbtnHTML = \'<div id="247saverpayment" class="checkout-form " style="padding: 1px;display:none;"> <div id="247CardSaverErr" style="color:red"></div> <form id="form" name="cardsaverpayment" method="POST" novalidate="novalidate" lang="en" action="https://gateway.cardstream.com/direct/"> <input type="hidden" id="247cardsaverkey" value="'.base64_encode(json_encode($tokenData,true)).'"><input type="hidden" id="merchantID" name="merchantID"><input type="hidden" id="action" name="action"><input type="hidden" id="type" name="type"><input type="hidden" id="countryCode" name="countryCode"><input type="hidden" id="currencyCode" name="currencyCode"><input type="hidden" id="amount" name="amount"><input type="hidden" id="orderRef" name="orderRef"><input type="hidden" id="transactionUnique" name="transactionUnique"><input type="hidden" id="redirectURL" name="redirectURL"><input type="hidden" id="signature" name="signature"> <ul class="form-checklist optimizedCheckout-form-checklist bootstrap-wrapper"> <li class="form-checklist-item optimizedCheckout-form-checklist-item form-checklist-item--selected optimizedCheckout-form-checklist-item--selected"> <div class="form-checklist-header form-checklist-header--selected"> <div class="row"> <div class="col-sm-12 col-md-8"> <div class="form-field"> <!-- <input name="paymentProviderRadio" class="form-checklist-checkbox optimizedCheckout-form-checklist-checkbox" id="radio-cardsaver" type="radio" value="cardsaver" checked> --><label for="radio-cardsaver" class="form-label optimizedCheckout-form-label"><span class="paymentProviderHeader-name" data-test="payment-method-name"><img style="height: 50px;" src="'.getenv('app.ASSETSPATH').'img/card-saver.png">&nbsp;&nbsp;Cardsaver Payments</span></label> </div> </div> <div class="col-sm-12 col-md-4"> <div class="paymentProviderHeader-cc"><ul class="creditCardTypes-list"><li class="creditCardTypes-list-item"><span class="cardIcon"><div class="icon cardIcon-icon icon--medium" data-test="credit-card-icon-visa"><svg height="100" viewBox="0 0 148 100" width="148" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M148 84c0 6.6-5.55 12-12 12H12C5.55 96 0 90.6 0 84V12C0 5.4 5.55 0 12 0h124c6.45 0 12 5.4 12 12v72z" fill="#F3F4F4"></path><path d="M0 24V12C0 5.4 5.74 0 12 0h124c6.26 0 12 5.4 12 12v12" fill="#01579F"></path><path d="M148 76v12c0 8.667-5.74 12-12 12H12c-6.26 0-12-3.333-12-12V76" fill="#FAA41D"></path><path d="M55.01 65.267l4.72-29.186h7.546l-4.72 29.19H55.01M89.913 36.8c-1.49-.59-3.85-1.242-6.77-1.242-7.452 0-12.7 3.974-12.73 9.656-.063 4.19 3.756 6.52 6.613 7.918 2.92 1.428 3.913 2.36 3.913 3.633-.04 1.957-2.36 2.857-4.54 2.857-3.014 0-4.628-.465-7.08-1.552l-.996-.466-1.055 6.55c1.77.808 5.03 1.52 8.415 1.553 7.92 0 13.075-3.912 13.137-9.967.03-3.322-1.987-5.868-6.334-7.948-2.64-1.336-4.256-2.236-4.256-3.602.032-1.242 1.367-2.514 4.348-2.514 2.453-.06 4.254.53 5.62 1.12l.684.31L89.91 36.8m10.03 18.13c.62-1.675 3.013-8.165 3.013-8.165-.03.062.62-1.707.994-2.794l.525 2.52s1.428 6.986 1.74 8.445H99.94zm9.317-18.846h-5.84c-1.8 0-3.17.53-3.945 2.424L88.265 65.27h7.918s1.305-3.6 1.585-4.377h9.687c.217 1.024.9 4.377.9 4.377h6.987l-6.082-29.19zm-60.555 0l-7.39 19.904-.807-4.037c-1.37-4.652-5.653-9.713-10.435-12.23l6.77 25.52h7.98L56.68 36.09H48.7" fill="#3B5CAA"></path><path d="M34.454 36.08H22.312l-.124.59c9.47 2.423 15.744 8.26 18.32 15.277L37.87 38.534c-.436-1.863-1.77-2.39-3.416-2.453" fill="#F8A51D"></path></g></svg></div></span></li><li class="creditCardTypes-list-item"><span class="cardIcon"><div class="icon cardIcon-icon icon--medium" data-test="credit-card-icon-american-express"><svg height="104" viewBox="0 0 156 104" width="156" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M144 104H12c-6.15 0-12-5.85-12-12V12C0 5.85 5.85 0 12 0h132c6.15 0 12 5.85 12 12v80c0 6.15-5.85 12-12 12z" fill="#60C7EE"></path><g fill="#FFF"><path d="M95.05 46.532v3.68h12.93v4.723H95.05V59.5h12.79l5.244-6.824-4.673-6.144H95.05m-59.707 9.382h5.906l-2.97-8.324-2.94 8.324"></path><path d="M128.833 52.77l11.29-15.125h-19.067l-2.536 3.9-2.608-3.9h-46.59l-1.254 4.224-1.264-4.227H31.27L17.72 68.687h17.326l1.31-3.822h3.824l1.345 3.822h73.594l3.28-4.594 3.28 4.594h19.36l-4.867-6.343-7.342-9.574zM83.185 64.744H76.38v-17.66l-5.243 17.66h-6.16l-5.233-17.66v17.66H44.318l-1.345-3.823H33.54l-1.312 3.826h-8.483L33.85 41.588h9.065L52.94 64.56V41.59h10.927l4.214 14.09 4.187-14.09h10.92v23.156zm40.524 0l-5.31-7.44-5.31 7.44H86.72V41.588h27.085l4.76 7.124 4.63-7.124h9.062l-8.37 11.215 9.16 11.94h-9.338z"></path></g></g></svg></div></span></li><li class="creditCardTypes-list-item"><span class="cardIcon"><div class="icon cardIcon-icon icon--medium" data-test="credit-card-icon-mastercard"><svg viewBox="0 0 131.39 86.9" xmlns="http://www.w3.org/2000/svg"><path d="M48.37 15.14h34.66v56.61H48.37z" fill="#ff5f00"></path><path d="M51.94 43.45a35.94 35.94 0 0113.75-28.3 36 36 0 100 56.61 35.94 35.94 0 01-13.75-28.31z" fill="#eb001b"></path><path d="M120.5 65.76V64.6h.5v-.24h-1.19v.24h.47v1.16zm2.31 0v-1.4h-.36l-.42 1-.42-1h-.36v1.4h.26V64.7l.39.91h.27l.39-.91v1.06zM123.94 43.45a36 36 0 01-58.25 28.3 36 36 0 000-56.61 36 36 0 0158.25 28.3z" fill="#f79e1b"></path></svg></div></span></li></ul></div> </div> </div> </div> <div style="" id="247cardsaverPaynowButton" class="form-checklist-body"> <input type="hidden" name="paymentToken" value=""> <div class="row"> <div class="col-sm-12 col-md-9"> <div class="form-group"><label for="form-card-number">Card Number:</label><input id="form-card-number" type="hostedfield:cardNumber" name="card-number" autocomplete="ccnumber" class="form-control form-controlhosted" style="background: #f2f8fb;" required></div> </div> <div class="col-sm-12 col-md-3"> <div class="form-group"><label for="form-card-expiry-date">Expiration:</label><input id="form-card-expiry-date" type="hostedfield:cardExpiryDate" name="card-expirydate" autocomplete="cc-exp" class="form-control form-control-hosted" placeholder="MM / YY" required></div> </div> </div> <div class="row"> <div class="col-sm-12 col-md-9"> <div class="form-group"><label for="form-customer-name">Name on Card:</label><input id="form-customer-name" type="text" name="paymentToken[customerName]" autocomplete="ccname" class="form-control form-control-native hostedfield-tokenise" required></div> </div> <div class="col-sm-12 col-md-3"> <div class="form-group form-cvv"><label for="form-card-cvv">CVV:</label><input id="form-card-cvv" type="hostedfield:cardCVV" name="card-cvv" autocomplete="cc-csc" class="form-control form-control-hosted" required></div> </div> </div> '.$buttonCode.'</div></li></ul></form></div>\';';
 			if($enable == 1){
 				$id = $result_c['container_id'];
 				$css_prop = $result_c['css_prop'];
 				
 				if(!empty($id)){
 					$filecontent .= '$(document).ready(function() {
-				var stIntIdCardstream = setInterval(function() {
+				var stIntIdCardsaver = setInterval(function() {
 					if($(".checkout-step--payment").length > 0) {
-						if($("#247cardsteampayment").length == 0){
-							$("'.$id.'").after(btnHTML);
-							loadCardstreamStatus();
-							clearInterval(stIntIdCardstream);
+						if($("#247saverpayment").length == 0){
+							$("'.$id.'").after(cardsaverbtnHTML);
+							loadCardsaverStatus();
+							clearInterval(stIntIdCardsaver);
 							/**
 								when user is logged in and billing/shipping 
 								address set show custom payment button 
 							*/
-							checkPayBtnVisibility();
+							checkCardsaverPayBtnVisibility();
 						}
 					}
 				}, 1000);';
 				}else{
 					$filecontent .= '$(document).ready(function() {
-					var stIntIdCardstream = setInterval(function() {
+					var stIntIdCardsaver = setInterval(function() {
 						if($(".checkout-step--payment").length > 0) {
-							if($("#247cardsteampayment").length == 0){
-								$(".checkout-step--payment .checkout-view-header").after(btnHTML);
-								loadCardstreamStatus();
-								clearInterval(stIntIdCardstream);
+							if($("#247saverpayment").length == 0){
+								$(".checkout-step--payment .checkout-view-header").after(cardsaverbtnHTML);
+								loadCardsaverStatus();
+								clearInterval(stIntIdCardsaver);
 								/**
 									when user is logged in and billing/shipping 
 									address set show custom payment button 
 								*/
-								checkPayBtnVisibility();
+								checkCardsaverPayBtnVisibility();
 							}
 						}
 					}, 1000);';
@@ -110,31 +106,31 @@ class CustomPaymentScript
 				}
 			}else{
 					$filecontent .= '$(document).ready(function() {
-		var stIntIdCardstream = setInterval(function() {
+		var stIntIdCardsaver = setInterval(function() {
 			if($(".checkout-step--payment").length > 0) {
-				if($("#247cardsteampayment").length == 0){
-					$(".checkout-step--payment .checkout-view-header").after(btnHTML);
-					loadCardstreamStatus();
-					clearInterval(stIntIdCardstream);
+				if($("#247saverpayment").length == 0){
+					$(".checkout-step--payment .checkout-view-header").after(cardsaverbtnHTML);
+					loadCardsaverStatus();
+					clearInterval(stIntIdCardsaver);
 					/**
 						when user is logged in and billing/shipping 
 						address set show custom payment button 
 					*/
-					checkPayBtnVisibility();
+					checkCardsaverPayBtnVisibility();
 				}
 			}
 		}, 1000);';
 			}
 			$filecontent .= '$("body").on("click","button[data-test=\'step-edit-button\'], button[data-test=\'sign-out-link\']",function(e){
-					//hide cardstream payment button
-					$("#247cardsteampayment").hide();
+					//hide cardsaver payment button
+					$("#247saverpayment").hide();
 				});
 
 				$("body").on("click", "button#checkout-customer-continue, button#checkout-shipping-continue, button#checkout-billing-continue", function() {
-					checkPayBtnVisibility();
+					checkCardsaverPayBtnVisibility();
 				});
 			});
-			function cardstreambillingAddressValdation(billingAddress){
+			function cardsaverbillingAddressValdation(billingAddress){
 				var errorCount = 0;
 				if(typeof(billingAddress.firstName) != "undefined" && billingAddress.firstName !== null && billingAddress.firstName !== "") {
 					
@@ -161,11 +157,6 @@ class CustomPaymentScript
 				}else{
 					errorCount++;
 				}
-				/*if(typeof(billingAddress.stateOrProvince) != "undefined" && billingAddress.stateOrProvince !== null && billingAddress.stateOrProvince !== "") {
-					
-				}else{
-					errorCount++;
-				}*/
 				if(typeof(billingAddress.postalCode) != "undefined" && billingAddress.postalCode !== null && billingAddress.postalCode !== "") {
 					
 				}else{
@@ -176,16 +167,11 @@ class CustomPaymentScript
 				}else{
 					errorCount++;
 				}
-				/*if(typeof(billingAddress.phone) != "undefined" && billingAddress.phone !== null && billingAddress.phone !== "") {
-					
-				}else{
-					errorCount++;
-				}*/
 				
 				return errorCount;
 			}
 
-			function cardstreamshippingAddressValdation(shippingAddress){
+			function cardsavershippingAddressValdation(shippingAddress){
 				var errorCount = 0;
 				if(shippingAddress.length > 0){
 					if(typeof(shippingAddress[0].shippingAddress) != "undefined" && shippingAddress[0].shippingAddress !== null && shippingAddress[0].shippingAddress !== "") {
@@ -210,11 +196,6 @@ class CustomPaymentScript
 						}else{
 							errorCount++;
 						}
-						/*if(typeof(shippingAddress.stateOrProvince) != "undefined" && shippingAddress.stateOrProvince !== null && shippingAddress.stateOrProvince !== "") {
-							
-						}else{
-							errorCount++;
-						}*/
 						if(typeof(shippingAddress.postalCode) != "undefined" && shippingAddress.postalCode !== null && shippingAddress.postalCode !== "") {
 							
 						}else{
@@ -225,11 +206,6 @@ class CustomPaymentScript
 						}else{
 							errorCount++;
 						}
-						/*if(typeof(shippingAddress.phone) != "undefined" && shippingAddress.phone !== null && shippingAddress.phone !== "") {
-							
-						}else{
-							errorCount++;
-						}*/
 					}
 				}else{
 					errorCount++;
@@ -265,7 +241,7 @@ class CustomPaymentScript
 				}
 				return false;
 			};
-			function loadCardstreamStatus(){
+			function loadCardsaverStatus(){
 				var key = getUrlParameter("cardsaverinv");
 				if(key != "undefined" && key != ""){
 					$.ajax({
@@ -277,16 +253,16 @@ class CustomPaymentScript
 						data:{"authKey":key},
 						success: function (res) {
 							if(res.status){
-								$("body #247CardStremErr").text(res.msg);
+								$("body #247CardSaverErr").text(res.msg);
 							}
 						}
 					});
 				}
 			}
 			';
-			$filecontent .= 'function checkPayBtnVisibility() {
+			$filecontent .= 'function checkCardsaverPayBtnVisibility() {
 				var checkDownlProd = false;
-				var key = $("body #247cardstreamkey").val();
+				var key = $("body #247cardsaverkey").val();
 				$.ajax({
 					type: "GET",
 					dataType: "json",
@@ -310,19 +286,19 @@ class CustomPaymentScript
 											var sstatus = 0;
 											if(typeof(cartres.billingAddress) != "undefined" && cartres.billingAddress !== null) {
 												billingAddress = cartres.billingAddress;
-												bstatus = cardstreambillingAddressValdation(billingAddress);
+												bstatus = cardsaverbillingAddressValdation(billingAddress);
 											}
 											if(checkDownlProd){
 												if(typeof(cartres.consignments) != "undefined" && cartres.consignments !== null) {
 													consignments = cartres.consignments;
-													sstatus = cardstreamshippingAddressValdation(consignments);
+													sstatus = cardsavershippingAddressValdation(consignments);
 												}
 											}
 
 											if(bstatus ==0 && sstatus == 0) {
 
-												//hide cardstream payment button
-												$("#247cardsteampayment").show();
+												//hide cardsaver payment button
+												$("#247saverpayment").show();
 												$.ajax({
 													type: "POST",
 													dataType: "json",
@@ -331,12 +307,12 @@ class CustomPaymentScript
 													dataType: "json",
 													data:{"authKey":key,"cartId":cartId},
 													success: function (res) {
-														$("#247cardsteampayment").waitMe("hide");
+														$("#247saverpayment").waitMe("hide");
 														if(res.status){
 															var data = res.data;
 															var form_id = res.form_id;
-															//var form = $("#247cardstreamPaynowButton").hostedForm(data);
-															/*var form = new window.hostedForms.classes.Form("247cardstreamPaynowButton", data);
+															//var form = $("#247cardsaverPaynowButton").hostedForm(data);
+															/*var form = new window.hostedForms.classes.Form("247cardsaverPaynowButton", data);
 															$("body "+form_id).submit();*/
 
 															$("#merchantID").val(data.data.merchantID);
@@ -352,18 +328,18 @@ class CustomPaymentScript
 
 															$("#form-submit").removeAttr(\'disabled\');
 
-															if(!hformInitialized) {
+															if(!cardsaverhformInitialized) {
 
 																//hide other payment buttons if present
-																////controlOtherPayButtons();
+																////cardsavercontrolOtherPayButtons();
 
 																setTimeout(hostedCardFields, 50);
-																hformInitialized = true;
+																cardsaverhformInitialized = true;
 															}
 
 														}
 													},error: function() {
-														$("#247cardsteampayment").waitMe("hide");
+														$("#247saverpayment").waitMe("hide");
 													}
 												});	
 											}
@@ -379,15 +355,15 @@ class CustomPaymentScript
 				});
 			}
 
-			function controlOtherPayButtons() {
+			function cardsavercontrolOtherPayButtons() {
 				
 				$("input[name=\'paymentProviderRadio\']").each(function(index) {
 					$(this).prop("checked", false);
 				});
 
 				$(".form-checklist-body").hide();
-				$("#radio-cardstream").prop("checked", true);
-				$("#247cardstreamPaynowButton").show();
+				$("#radio-cardsaver").prop("checked", true);
+				$("#247cardsaverPaynowButton").show();
 				$("#checkout-payment-continue").attr("disabled", true);
 
 
@@ -402,7 +378,7 @@ class CustomPaymentScript
 
 					$(this).prop("checked", true);
 
-					if($(this).attr("id") == "radio-cardstream") {			
+					if($(this).attr("id") == "radio-cardsaver") {			
 						$("#checkout-payment-continue").attr("disabled", true);
 						
 					} else {
@@ -414,7 +390,7 @@ class CustomPaymentScript
 				});
 
 			}';
-			$filecontent .= file_get_contents(getenv('app.ASSETSPATH')."js/hostedFields.js");
+			$filecontent .= file_get_contents(getenv('app.ASSETSPATH')."js/cardsaverhostedFields.js");
 			$filename = 'custom_script.js';
 			helper('filestream');
 			$res = \FileStream::saveFile($filename,$filecontent,$folderPath);
