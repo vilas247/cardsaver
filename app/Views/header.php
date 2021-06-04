@@ -25,7 +25,7 @@
     <link href="<?= getenv('app.ASSETSPATH') ?>css/custom.css?v=1.00" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<?= getenv('app.ASSETSPATH') ?>css/datatable/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="<?= getenv('app.ASSETSPATH') ?>css/toaster/toaster.css">
-	<link rel="stylesheet" href="<?= getenv('app.ASSETSPATH') ?>css/247carstreamloader.css">
+	<link rel="stylesheet" href="<?= getenv('app.ASSETSPATH') ?>css/247cardsaverloader.css">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">

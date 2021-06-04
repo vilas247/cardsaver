@@ -86,8 +86,8 @@
   </body>
 </html>
 <script src="<?= getenv('app.ASSETSPATH') ?>js/jquery-min.js"></script>
-<script src="<?= getenv('app.ASSETSPATH') ?>js/toaster/jquery.toaster.js.js"></script>
-<script src="<?= getenv('app.ASSETSPATH') ?>js/247carstreamloader.js"></script>
+<script src="<?= getenv('app.ASSETSPATH') ?>js/toaster/jquery.toaster.js"></script>
+<script src="<?= getenv('app.ASSETSPATH') ?>js/247cardsaverloader.js"></script>
 <script>
 	var text = "Please wait...";
 	var current_effect = "bounce";
